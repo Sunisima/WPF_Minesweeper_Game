@@ -17,23 +17,49 @@
         <Grid Grid.Row="0">
             <Rectangle Grid.Row="0" Fill="LightGray"/>
             <Rectangle Grid.Row="0" Grid.Column="1" Fill="LightGray"/>
-            <TextBlock x:Name="tbMinesDisplay" Width="150" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="1" Width="150" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="tb_MinesDisplay" Width="150" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="tb_TimeDisplay" Grid.Column="1" Width="150" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="225"/>
                 <ColumnDefinition Width="225"/>
             </Grid.ColumnDefinitions>
         </Grid>
-        
-        
+               
         <!-- Reset Button bar -->
         <Rectangle Grid.Row="1" Fill="LightGray"/>
+        <Button x:Name="btn_ResetGame" Click="btn_ResetGame_Click" Content="Play again" Height="25" Width="80" Foreground="White" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" BorderBrush="#FFF6F6F6" Background="#FF685E5E" FontFamily="Bodoni MT Black"/>
         
         <!-- Minesweeper pane-->
         <Grid Grid.Row="2">
-            
+            <Rectangle Fill="LightGray"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="15"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="15"/>
+            </Grid.ColumnDefinitions>
         </Grid>
-        <Button x:Name="btn_ResetGame" Click="btn_ResetGame_Click" Content="Play again" HorizontalAlignment="Left" Margin="274,31,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        
     </Grid>
 
 </Window>
