@@ -1,0 +1,39 @@
+﻿<Window x:Class="WPF_Minesweeper_Game.MinesweeperWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Minesweeper_Game"
+        mc:Ignorable="d"
+        Title="Minesweeper" Height="600" Width="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="400" />
+        </Grid.RowDefinitions>
+
+        <!-- Timer/Mine bar -->
+        <Grid Grid.Row="0">
+            <Rectangle Grid.Row="0" Fill="LightGray"/>
+            <Rectangle Grid.Row="0" Grid.Column="1" Fill="LightGray"/>
+            <TextBlock x:Name="tbMinesDisplay" Width="150" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Width="150" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="225"/>
+                <ColumnDefinition Width="225"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        
+        
+        <!-- Reset Button bar -->
+        <Rectangle Grid.Row="1" Fill="LightGray"/>
+        
+        <!-- Minesweeper pane-->
+        <Grid Grid.Row="2">
+            
+        </Grid>
+        <Button x:Name="btn_ResetGame" Click="btn_ResetGame_Click" Content="Play again" HorizontalAlignment="Left" Margin="274,31,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+    </Grid>
+
+</Window>
