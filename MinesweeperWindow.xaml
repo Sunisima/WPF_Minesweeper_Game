@@ -24,42 +24,17 @@
                 <ColumnDefinition Width="225"/>
             </Grid.ColumnDefinitions>
         </Grid>
-               
+
         <!-- Reset Button bar -->
         <Rectangle Grid.Row="1" Fill="LightGray"/>
-        <Button x:Name="btn_ResetGame" Click="btn_ResetGame_Click" Content="Play again" Height="25" Width="80" Foreground="White" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" BorderBrush="#FFF6F6F6" Background="#FF685E5E" FontFamily="Bodoni MT Black"/>
-        
+        <Button x:Name="btn_ResetGame" Click="btn_ResetGame_Click" Content="Play again" Height="25" Width="80" Foreground="White" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" BorderBrush="#FFF6F6F6" FontFamily="Bodoni MT Black"/>
+
         <!-- Minesweeper pane-->
         <Grid Grid.Row="2">
-            <Rectangle Fill="LightGray"/>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="15"/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition Height="15"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="15"/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="15"/>
-            </Grid.ColumnDefinitions>
+            <Rectangle Fill="LightGray" Grid.RowSpan="1" Grid.ColumnSpan="1"/>
+            <UniformGrid x:Name="ug_GameBoard" Rows="9" Columns="9" Margin="15">
+             </UniformGrid>
         </Grid>
-        
     </Grid>
 
 </Window>

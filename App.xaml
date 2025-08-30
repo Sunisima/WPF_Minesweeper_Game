@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:WPF_Minesweeper_Game"
              StartupUri="MinesweeperWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="#FF685E5E"/>
+            <Setter Property="Background" Value="#FF685E5E"/>
+        </Style>
     </Application.Resources>
 </Application>
