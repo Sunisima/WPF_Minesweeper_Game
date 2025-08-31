@@ -11,7 +11,7 @@ namespace WPF_Minesweeper_Game
 {
     public class Cell
     {
-        //– Har properties som: Row, Col, IsMine, IsFlagged, IsRevealed, AdjacentMines.
+        //– Har properties som: Row, Col, IsAMine, IsFlagged, IsRevealed, AdjacentMines.
         //Kan ændre tilstand(blive afsløret, sættes flag på).
 
         // Variabler / properties
@@ -20,7 +20,8 @@ namespace WPF_Minesweeper_Game
         public bool IsAMine { get; set; }
         public bool IsFlagged { get; set; }
         public bool IsRevealed { get; set; }
-        public int AdjacentMines { get; set; }
+        //Holds the number of mines around the cell (0-8)
+        public int MinesAroundCell { get; set; }
 
         // Constructor
         public Cell(int row, int col)

@@ -9,6 +9,10 @@ namespace WPF_Minesweeper_Game
     public enum GameResult { Win, Lose }
     public enum GameStatus { Ready, Running, Won, Lost }
 
+    /// <summary>
+    /// /// A class that tracks the state of the game (Ready, Running, Won, Lost) 
+    /// and updates it when the game changes.
+    /// </summary>
     class GameState
     {
         //Holder styr på: Ready, Running, Won, Lost (enum eller property).
