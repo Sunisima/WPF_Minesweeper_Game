@@ -14,15 +14,12 @@ namespace WPF_Minesweeper_Game
             for (int i = 0; i < 81; i++)
             {
                 var btn = new Button();
-                {
-                    Style = (Style)FindResource("PlayButton");
-                    Tag = i;
-                }
-                ;
+                { 
+                    btn.Tag = i; 
+                };
                 btn.Click += GameBoardButton_Click;
                 ug_GameBoard.Children.Add(btn);
-            }
-            ;
+            };
         }
 
         /// <summary>

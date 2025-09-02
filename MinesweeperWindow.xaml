@@ -25,7 +25,7 @@
             </Grid.ColumnDefinitions>
         </Grid>
 
-        <!-- Reset Button bar -->
+        <!-- Play again button bar -->
         <Rectangle Grid.Row="1" Fill="LightGray"/>
         <Button x:Name="btn_ResetGame" Click="btn_ResetGame_Click" Content="Play again" Height="25" Width="80" Foreground="White" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" BorderBrush="#FFF6F6F6" FontFamily="Bodoni MT Black"/>
 

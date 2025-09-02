@@ -32,6 +32,8 @@ namespace WPF_Minesweeper_Game
         public GameState State { get; private set; } = new GameState();
         //To display how many mines left to find
         public int RemainingMines => TotalMines - CountFlags;
+        //Random object for placing mines on board
+        private readonly Random _rdnPosition = new Random();
 
         /// <summary>
         /// Creates a new board with 81 cells
@@ -42,11 +44,12 @@ namespace WPF_Minesweeper_Game
         /// </summary>
         public void StartGame()
         {
-            // TRIN: opret celler, nulstil tællere
+            //Instansiates 2D array to hold 81 cells
             Cells = new Cell[Rows, Cols];
-            // TRIN: placer miner
-            // TRIN: beregn MinesAroundCell
-            // SIDE-EFFEKT: spillet går i Ready
+            CountFlags = 0;
+            RevealedSafeCells = 0;
+            PlaceMines();
+            ComputeMinesAround();
         }
 
         public void ResetGame()
@@ -84,9 +87,24 @@ namespace WPF_Minesweeper_Game
             // SIDE-EFFEKT: opdater FlagCount
         }
 
+        /// <summary>
+        /// Places 11 mines randomly
+        /// </summary>
         private void PlaceMines()
         {
-            // TRIN: læg TotalMines miner på tomme celler
+            int mineCount = 0; //Sets mines placed to zero
+
+
+            do
+            {
+                int row = _rdnPosition.Next(9);
+                int col = _rdnPosition.Next(9);
+
+                // TRIN: læg TotalMines miner på tomme celler
+
+            }
+            while (mineCount < TotalMines);
+                       
         }
 
         // // Går igennem alle celler i brættet og beregner for hver celle,
