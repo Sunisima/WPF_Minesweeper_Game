@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Minesweeper_Game"
         mc:Ignorable="d"
-        Title="Minesweeper" Height="600" Width="450">
+        Title="Minesweeper" Height="620" Width="450">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="120"/>
@@ -13,7 +13,7 @@
             <RowDefinition Height="400" />
         </Grid.RowDefinitions>
 
-        <!-- Timer/Mine bar -->
+        <!-- Mine bar -->
         <Grid Grid.Row="0">
             <Rectangle Grid.Row="0" Fill="LightGray"/>
             <Rectangle Grid.Row="0" Grid.Column="1" Fill="LightGray"/>

@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Documents;
-using CommunityToolkit.Diagnostics;
-
-namespace WPF_Minesweeper_Game
+﻿namespace WPF_Minesweeper_Game
 {
     /// <summary>
     /// Holds all information about our board and cells within the board 
@@ -23,15 +13,9 @@ namespace WPF_Minesweeper_Game
         //Total mines to be placed on the board
         public int TotalMines { get; } = 11;
         //2D-array that holds all cells within the board (Rows and Cols)
-        public Cell[,] Cells { get; private set; }
-        //Counting how many flags that has already been set on the board by the user
-        public int CountFlags { get; private set; }
+        public GameCells[,] Cells { get; private set; }
         //Used to determine whether or not a player has revealed all cells with no mines
         public int RevealedSafeCells { get; private set; }
-        //Initializes a new GameState to track the current state of the game
-        public GameState State { get; private set; } = new GameState();
-        //To display how many mines left to find
-        public int RemainingMines => TotalMines - CountFlags;
         //Random object for placing mines on board
         private readonly Random _rdnPosition = new Random();
 
@@ -45,46 +29,24 @@ namespace WPF_Minesweeper_Game
         public void StartGame()
         {
             //Instansiates 2D array to hold 81 cells
-            Cells = new Cell[Rows, Cols];
-            CountFlags = 0;
+            Cells = new GameCells[Rows, Cols];
+            //Loops through every row/col combination and instansiates with at cell
+            for (int r = 0; r < Rows; r++)
+            {
+                for (int c = 0; c < Cols; c++)
+                {
+                    Cells[r, c] = new GameCells(r, c);
+                }
+            }
             RevealedSafeCells = 0;
             PlaceMines();
             ComputeMinesAround();
         }
 
-        public void ResetGame()
-        {
-            // TRIN: nulstil Cells, CountFlags, RevealedSafeCells
-            // TRIN: reset GameState
-            // TRIN: nulstil timer
-            // SIDE-EFFEKT: nyt spil startes
-        }
-
-        public void EndGame(GameResult result)
-        {
-            // GUARD: intet
-            // TRIN: hvis Win → GameState.Win()
-            // TRIN: hvis Lose → GameState.Lose()
-            // SIDE-EFFEKT: stop timer, afslør miner
-        }
-
         public void RevealCell(int row, int col)
         {
-            // GUARD: hvis spil slut, cell er flagget eller allerede afsløret → return
-            // Venstre museklik til reveal af felter.
-            // TRIN: hvis mine → EndGame(Lose)
-            // TRIN: ellers afslør cell
-            // TRIN: hvis MinesAroundCell == 0 → flood-fill naboer (recursion)
-            // STOP-BETINGELSE: hvis alle sikre felter afsløret → EndGame(Win)
-        }
-
-        public void ToggleFlag(int row, int col)
-        {
-            // GUARD: hvis spil slut eller cell afsløret → return
-            //Højre museklik bruges til flag/fjern flag
-            // TRIN: hvis allerede flagget → fjern flag
-            // TRIN: ellers → sæt flag
-            // SIDE-EFFEKT: opdater FlagCount
+            var cell = Cells[row, col];
+            cell.IsRevealed = true;
         }
 
         /// <summary>
@@ -94,47 +56,81 @@ namespace WPF_Minesweeper_Game
         {
             int mineCount = 0; //Sets mines placed to zero
 
-
             do
             {
                 int row = _rdnPosition.Next(9);
                 int col = _rdnPosition.Next(9);
 
-                // TRIN: læg TotalMines miner på tomme celler
-
+                if (Cells[row, col].IsAMine == false)
+                {
+                    mineCount++;
+                    Cells[row, col].IsAMine = true;
+                }               
             }
-            while (mineCount < TotalMines);
-                       
+            while (mineCount < TotalMines);                       
         }
 
-        // // Går igennem alle celler i brættet og beregner for hver celle,
-        // hvor mange af de 8 naboer der er miner.
-        // Resultatet (0–8) gemmes i cellens MinesAroundCell property.
+        // Loops through ever cell on the board and calculates the number of neighbor mines for each cell. 
+        // The result (0-8) is saved in the MinesAroundCell property
         private void ComputeMinesAround()
-        {
-            // TRIN: for hver cell → CountMinesAroundCell(row,col)
-            // SIDE-EFFEKT: sæt MinesAroundCell på hver cell
+        {            
+            for (int r = 0; r < Rows; r++)
+            {
+                for (int c = 0; c < Cols; c++)
+                {
+                    int mines = CountMinesAroundCell(r, c);
+                    Cells[r, c].MinesAroundCell = mines;                    
+                }
+            }
         }
 
-
+        /// <summary>
+        /// Counts how many of the neighbor cells around the given cell is a mine
+        /// Does not count the given cell itself.
+        /// </summary>
+        /// <param name="row">the row of the cell to check for neighbouring mines</param>
+        /// <param name="col">the column of the cell to check for neighbouring mines</param>
+        /// <returns></returns>
         private int CountMinesAroundCell(int row, int col)
         {
-            // TRIN: tæl naboer med IsAMine
-            // RETURN: tal fra 0–8
-            return 0;
+            int mineCount = 0;
+            
+            for (int r = row - 1; r <= row + 1; r++)
+            {
+                for (int c = col - 1; c <= col + 1; c++)
+                {
+                    if(InBounds(r,c))
+                    {
+                        if(r == row && c == col)
+                        {
+                            continue;                            
+                        }
+                        if(Cells[r, c].IsAMine == true)
+                        {
+                            mineCount++;
+                        }
+                    }                 
+                }
+            }
+            return mineCount;
         }
 
+        /// <summary>
+        /// Checking if cols and rows are within the bounds of the board
+        /// </summary>
+        /// <param name="row"> the specific row of the cell to check the bounds around </param>
+        /// <param name="col"> the specific column of the cell to check the bounds around </param>
+        /// <returns> true if it in within bounds </returns>
         private bool InBounds(int row, int col)
         {
-            // TRIN: check 0 <= row < Rows og 0 <= col < Cols
-            return false;
-        }
-
-        private bool IsAWin()
-        {
-            // TRIN: tjek om RevealedSafeCells == Rows*Cols - TotalMines
-            // RETURN: true/false
-            return false;
+            if(row >= 0 && row < Rows && col >= 0 && col < Cols)
+            {
+                return true;
+            }
+            else 
+            { 
+                return false; 
+            }
         }
     }
 }
